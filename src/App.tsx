@@ -1,14 +1,13 @@
 import "./App.css";
 
-function App() {
-  function getFullName(firstName: string, lastName: string, alder?: number) {
-    return `mitt navn er ${firstName} ${lastName} ${!alder ? "" : alder}`;
-  }
+import finnTilfeldigOrd from "./components/ord";
 
+function App() {
   return (
-    <>
-      <main>{getFullName("Latif", "Hassan")}</main>
-    </>
+    <main>
+      <article> Hvilken ord ser du her? </article>
+      {finnTilfeldigOrd("adjektiver")} - {finnTilfeldigOrd("substantiver")}
+    </main>
   );
 }
 
