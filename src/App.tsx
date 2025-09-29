@@ -1,30 +1,52 @@
+import { useState } from "react";
 import "./App.css";
 
+import Zoo from "./data.tsx";
+
 function App() {
-  type Menneske = {
+  const [dyrList, setDyrList] = useState<Dyr[]>(() => [...Zoo.dyrene]);
+
+  /*
+  type Ansatt = {
     navn: string;
     alder: number;
-    addresse: string;
-    barn: {
-      antall: number[];
+    ansattÅr: number;
+  };
+*/
+
+  type Dyr = {
+    navn: string;
+    høydeMeter: number;
+    favoritt: {
+      mat: string;
+      aktivitet: string;
     };
   };
 
-  const erik: Menneske = {
-    navn: "erik",
-    alder: 44,
-    addresse: "halserund 33",
-    barn: {
-      antall: [4],
+  const rev: Dyr = {
+    navn: "misterlure-lur",
+    høydeMeter: 1.25,
+    favoritt: {
+      mat: "hamster",
+      aktivitet: "jakte",
     },
   };
 
-  console.log(erik);
+  function leggTilDyr() {
+    setDyrList((prevList) => [...prevList, rev]);
+  }
 
   return (
     <>
       <main>
-        jeg heter {erik.navn} og jeg bor på {erik.addresse}
+        {" "}
+        han heter {rev.navn} og liker å spise {rev.favoritt.mat}
+        Det er totalt {Zoo.dyrene.length} i dyrehagen;
+        <button onClick={leggTilDyr}> legg til rev</button>
+        Det er nå totalt {dyrList.length} i dyrehagen. De heter{" "}
+        {dyrList.map((dyr) => (
+          <p key={dyr.navn}>{dyr.navn}</p>
+        ))}
       </main>
     </>
   );
